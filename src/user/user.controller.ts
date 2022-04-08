@@ -18,4 +18,19 @@ export class UserController {
       password: await bcrypt.hash(user.password, 12),
     });
   }
+
+  @Post('login')
+  async login(
+    @Body('email') email: string,
+    @Body('password') password: string,
+  ) {
+    const user = await this.userService.findOne({ email });
+    if (!user) {
+      return new BadRequestException('Invalid credentials');
+    }
+    if (await bcrypt.compare(password, user.password)) {
+      return new BadRequestException('Invalid credentials');
+    }
+    return user;
+  }
 }
