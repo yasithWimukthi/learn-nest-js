@@ -13,7 +13,7 @@ export class UserService {
     return this.userRepository.save(body);
   }
 
-  async findOne(options){
+  async findOne(options) {
     return this.userRepository.findOne(options);
   }
 }
