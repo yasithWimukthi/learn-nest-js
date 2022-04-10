@@ -48,6 +48,7 @@ export class UserController {
       { expiresIn: '60s' },
     );
     const refreshToken = this.jwtService.signAsync({ id: user.id });
+    response.status(200);
     response.cookie('access_token', accessToken, {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 7,
