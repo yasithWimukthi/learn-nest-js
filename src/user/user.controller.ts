@@ -70,4 +70,22 @@ export class UserController {
       return new BadRequestException('Invalid credentials');
     }
   }
+
+  @Post('refresh')
+  async refresh(
+    @Req() request: Request,
+    @Res({ passthrough: true }) response: Response,
+  ) {
+    try {
+      const refreshToken = request.cookies['refresh_token'];
+      const { id } = await this.jwtService.verifyAsync(refreshToken);
+      const accessToken = this.jwtService.signAsync({ id });
+      response.status(200);
+      return {
+        token: accessToken,
+      };
+    } catch (e) {
+      return new BadRequestException('Invalid credentials');
+    }
+  }
 }
