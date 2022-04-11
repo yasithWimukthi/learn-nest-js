@@ -2,13 +2,15 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Get,
   Post,
+  Req,
   Res,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import bcrypt from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 
 @Controller()
 export class UserController {
@@ -56,5 +58,16 @@ export class UserController {
     return {
       token: accessToken,
     };
+  }
+
+  @Get('user')
+  async getUser(@Req() request: Request) {
+    try {
+      const accessToken = request.headers.authorization.split(' ')[1];
+      const { id } = await this.jwtService.verifyAsync(accessToken);
+      const { password, ...data } = await this.userService.findOne({ id });
+    } catch (e) {
+      return new BadRequestException('Invalid credentials');
+    }
   }
 }
