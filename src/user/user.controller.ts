@@ -91,7 +91,7 @@ export class UserController {
 
   @Post('logout')
   async logout(@Res({ passthrough: true }) response: Response) {
-    response.clearCookie('access_token');
+    response.clearCookie('refresh_token');
     response.status(200);
     return {
       message: 'Logged out successfully',
