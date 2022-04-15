@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { TokenService } from './user/token.service';
+import { ResetModule } from './reset/reset.module';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
 
@@ -22,6 +23,7 @@ require('dotenv').config();
       synchronize: true,
     }),
     UserModule,
+    ResetModule,
   ],
 })
 export class AppModule {}
