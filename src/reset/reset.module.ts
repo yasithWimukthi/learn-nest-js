@@ -4,6 +4,7 @@ import { ResetService } from './reset.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Reset } from './reset.entity';
 import { MailerModule } from '@nestjs-modules/mailer';
+import { UserModule } from '../user/user.module';
 @Module({
   imports: [
     TypeOrmModule.forFeature([Reset]),
@@ -16,6 +17,7 @@ import { MailerModule } from '@nestjs-modules/mailer';
         from: 'yasith@gmail.com',
       },
     }),
+    UserModule,
   ],
   controllers: [ResetController],
   providers: [ResetService],

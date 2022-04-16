@@ -13,4 +13,8 @@ export class ResetService {
   async save(body) {
     return this.resetRepository.save(body);
   }
+
+  async findOne(options) {
+    return this.resetRepository.findOne(options);
+  }
 }
