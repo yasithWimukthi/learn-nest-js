@@ -16,4 +16,8 @@ export class UserService {
   async findOne(options) {
     return this.userRepository.findOne(options);
   }
+
+  async update(options, body) {
+    return this.userRepository.update(options, body);
+  }
 }

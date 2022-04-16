@@ -1,7 +1,13 @@
-import {BadRequestException, Body, Controller, NotFoundException, Post} from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  NotFoundException,
+  Post,
+} from '@nestjs/common';
 import { ResetService } from './reset.service';
 import { MailerService } from '@nestjs-modules/mailer';
-import {UserService} from "../user/user.service";
+import { UserService } from '../user/user.service';
 import bcrypt from 'bcryptjs';
 
 @Controller('reset')
@@ -29,9 +35,9 @@ export class ResetController {
 
   @Post('reset')
   async reset(
-      @Body('token') token: string,
-      @Body('password') password: string,
-      @Body('password_confirm') password_confirm: string
+    @Body('token') token: string,
+    @Body('password') password: string,
+    @Body('password_confirm') password_confirm: string,
   ) {
     if (password !== password_confirm) {
       throw new BadRequestException('Passwords do not match');
